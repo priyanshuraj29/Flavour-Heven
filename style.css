@@ -1,0 +1,498 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body{
+    font-family: Tinos,sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+.hero-text-box{
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 60%;
+    transform: translate(-10%,-50%);
+}
+.btn:link,
+.btn:visited,
+input[type=submit]{
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-weight: 300;
+    border-radius: 200px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+.btn-full:link,
+.btn-full:visited,
+input[type=submit]{
+    background-color: #e67e22;
+    color: white;
+    border: 1px solid #e67e22;
+    margin-right: 25px;
+}
+.btn-ghost:link,
+.btn-ghost:visited{
+    border: 1px solid #e67e22;
+    color: #e67e22;
+}
+.btn:hover,
+.btn:active,
+input[type=submit]{
+    background-color: #cf6d17;
+}
+.btn-ghost:hover,
+.btn-ghost:active{
+    border: 1px solid #cf6d17;
+    color: white;
+}
+.site-nav{
+    background: linear-gradient(90deg, #e67e22 0%, #fb8c00 100%);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    position:relative;
+    z-index:999;
+}
+nav{
+    background: linear-gradient(90deg, #e67e22 0%, #fb8c00 100%);
+    padding: 6px 0;
+}
+/* layout tweak for nav rows: use flex so items align vertically and don't overlap hero */
+nav .row{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:6px 18px}
+/* smaller logo in the nav so it doesn't push links out of view */
+.site-nav .logo{height:72px;margin-top:0;margin-left:10px}
+/* ensure nav links are visible on the orange background */
+.site-nav .main-nav{float:none;margin:0}
+.site-nav .main-nav li{display:inline;margin-left:28px}
+.site-nav .main-nav li a:link, .site-nav .main-nav li a:visited{color:#ffffff}
+.site-nav .main-nav li a:hover, .site-nav .main-nav li a:active{border-bottom:2px solid rgba(255,255,255,0.25)}
+
+/* Transparent navbar variant for the homepage (over hero) */
+.site-nav.transparent-nav{
+    background: transparent;
+    box-shadow: none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:12px 0;
+}
+.site-nav.transparent-nav .row{max-width:1200px;margin:0 auto;padding:6px 18px}
+.site-nav.transparent-nav .logo{height:110px;margin-top:6px}
+.site-nav.transparent-nav .main-nav li a:link,
+.site-nav.transparent-nav .main-nav li a:visited{
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+}
+.site-nav.transparent-nav .main-nav li a:hover,
+.site-nav.transparent-nav .main-nav li a:active{
+    color: #ffd59e;
+    border-bottom: 2px solid rgba(255,255,255,0.6);
+    transition: color .18s, border-bottom .18s;
+}
+/* subtle backdrop so links remain readable on very bright hero images */
+.site-nav.transparent-nav::after{
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 72px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0));
+    pointer-events: none;
+}
+.logo{
+    height: 150px;
+    width: auto;
+    float: left;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.main-nav{
+    float: right;
+    list-style: none;
+    margin-top: 65px;
+    margin-right: 70px;
+    
+}
+
+.main-nav li{
+    display: inline;
+    margin-left: 40px;
+}
+.main-nav li a:link,
+.main-nav li a:visited{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 100%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+    border-bottom: 2px solid #e67e22;
+}
+
+.section-features{
+    height: 520px;
+    padding: 88px;
+    font-size: larger;
+}
+
+.section-features h2{
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.section-features h2:after{
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+.long-copy{
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%;
+}
+.box{
+    padding: 1%;
+}
+h3{
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 110%;
+    margin-bottom: 15px;
+}
+
+.box p{
+    font-size: 90%;
+    line-height: 145%;
+}
+
+.icon-big{
+    font-size: 350%;
+    display: block;
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+.meal-showcase{
+    list-style: none;
+    width: 100%;
+}
+.meal-showcase li{
+    display: block;
+    float: left;
+    width: 25%;
+}
+.meal-photo{
+    height: 300px;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    transition: transform 0.5s,opacity 0.5s;
+
+}
+.meal-photo img{
+    width: 100%;
+    height: auto;
+    transform: scale(1.15);
+    opacity: 0.7;
+}
+
+.meal-photo img:hover{
+    transform: scale(1.03);
+    opacity: 1;
+}
+.section-meals{
+    height: 550px;
+    padding: 0;
+}
+.section-features .long-copy{
+    margin-bottom: 30px;
+}
+.section-steps h2 {
+    margin-bottom: 3rem;
+    margin-left: 13rem;
+}
+.section-steps{
+    height: 700px;
+    background-color: azure;
+    font-size: larger;
+}
+.works-step{
+    margin-bottom: 50px;
+    margin-right: 25px;
+}
+.steps-box:first-child{
+    text-align: center;
+    padding-right: 3%;
+    margin-top: 30px;
+}
+
+.steps-box:last-child{
+    padding-left: 3%;
+    margin-top: 70px;
+}
+
+.app-screeing{
+    width: 79%;
+}
+
+.works-step div{
+    color: #e67e22;
+    border: 4px solid #e67e22;
+    display: inline-block;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    padding: 5px;
+    margin-right: 25px;
+    float:left;
+    font-size: 150%;
+}
+.works-step:last-of-type{
+    margin-bottom: 80px;
+}
+
+.btn-app img{
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+.btn-app:link,
+.btn-app:visited{
+    border: 0;
+}
+.row1{
+    width: 1200px;
+    margin-top: 50rem;
+}
+.row-1 h2{
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.row-1 h2:after{
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+/* city section */
+.section-cities{
+    height: 500px;
+    width: auto;
+    font-size: larger;
+}
+.row h2{
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.row h2:after{
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+.box img{
+    width: 100%;
+    height: 190px;
+    margin-bottom: 15px;
+}
+.city-features{
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+.icon-small{
+    display: inline-block;
+    width: 30px;
+    color: #e67e22;
+    text-align: center;
+    font-size: 120%;
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+a:link,
+a:visited{
+    color: #e67e22;
+    text-decoration: none;
+    border-bottom: 1px solid #e67e22;
+    padding-bottom: 1px;
+}
+a:hover,
+a:active{
+    color: #555;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.5s,color 0.5s;
+}
+/* testimonials */
+.section-testimonials{
+    height: 500px;
+    background-image:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url(imgs/resturent.jpg);
+    background-size: cover;
+    color: #ffffff;
+    background-attachment: fixed;
+    justify-items: center;
+    font-size: larger;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+blockquote{
+    padding: 2%;
+    font-style: italic;
+    line-height: 140%;
+    margin-top: 60px;
+    position: relative;
+}
+cite{
+    font-size: 90%;
+    display: block;
+    margin-top: 30px;
+}
+cite img{
+    height: 60px;
+    border-radius: 50%;
+    margin-top: 25px;
+    margin-right: 10px;
+    vertical-align:bottom;
+}
+
+/* plan section */
+.section-plan{
+    padding-top: 30px;
+    font-size: larger;
+    background-color: #f4f4f4;
+}
+.plan-box{
+    background-color: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+}
+.plan-box div{
+    padding: 15px;
+    border-bottom: 1px solid #e8e8e8;
+
+}
+.plan-price{
+    font-size: 300%;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: #e67e22;
+}
+.plan-price-meal{
+    font-size: 80%;
+}
+.plan-price span{
+    font-size: 30%;
+    font-weight: 300;
+}
+.plan-box ul{
+    list-style: none;
+}
+.plan-box ul li{
+    padding: 5px 0;
+}
+.plan-box div:last-child{
+    border: 0;
+    text-align: center;
+}
+.plan-box div:first-child{
+    background-color: #fcfcfc;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* form */
+.contact-form{
+    height: 500px;
+    width: 60%;
+    margin: 0 auto;
+    font-size: larger;
+}
+input[type=text],
+input[type=email],
+select,
+textarea{
+    width: 80%;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+textarea{
+    height: 100%;
+}
+input[type=checkbox]{
+    margin: 10px 5px 10px 0;
+}
+/* footer */
+.footer-nav{
+    list-style: none;
+    float: left;
+}
+.social-link{
+    list-style: none;
+    float: right;
+}
+.footer-nav li,
+.social-link li{
+    display: inline-block;
+    margin-right: 20px;
+}
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-link li a:link,
+.social-link li a:visited{
+    text-decoration: none;
+    border: 0;
+    color: #888;
+}
+.footer-nav li a:hover,
+.footer-nav li a:hover{
+    color: #ddd;
+}
+footer p{
+    color: #888;
+    text-align: center;
+    font-size: 90%;
+    margin-top: 20px;
+}
+.social-link li a:hover,
+.social-link li a:hover{
+    color: #ddd;
+}
