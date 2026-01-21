@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Menu / Order</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="vendor/css/grid.css">
+    <link rel="stylesheet" href="resources/css/order.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="row">
+            <img class="logo" src="resources/imgs/logo.png" alt="logo-img">
+            <ul class="main-nav">
+                <li><a href="booking.html">Book Table</a></li>
+                <li><a href="order.html">Order Food </a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="menu-page">
+        <header class="menu-header">
+            <h1>Our Menu</h1>
+            <p>Tap Add to place an item into your cart. Choose Dine or Pickup and pick a time.</p>
+        </header>
+
+        <section class="menu-area">
+            <div class="menu-grid" id="menuGrid">
+                <!-- Dish cards: use data attributes for id and price -->
+                <article class="dish-card" data-id="1" data-name="Guacamole" data-price="1818">
+                    <img src="https://assets.unileversolutions.com/recipes-v2/232478.jpg" alt="Guacamole">
+                    <div class="dish-body">
+                        <h3>Guacamole</h3>
+                        <p class="dish-desc">avocado, tomato, onion, fresh cilantro, serrano chile, corn chips</p>
+                        <div class="dish-meta">₹1,818.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="2" data-name="Salsa El Jefe" data-price="1287">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.xoSt27k2qtsSar3BF9oQ6gHaHa?pid=Api&P=0&h=180" alt="Salsa">
+                    <div class="dish-body">
+                        <h3>Salsa El Jefe</h3>
+                        <p class="dish-desc">freshly made salsa roja with morita chile, cilantro, chips</p>
+                        <div class="dish-meta">₹1,287.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="3" data-name="Crickets" data-price="581">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.lBMCXjIPTrVKavHfKHZNHgHaEl?pid=Api&P=0&h=180" alt="Crickets">
+                    <div class="dish-body">
+                        <h3>Crickets</h3>
+                        <p class="dish-desc">salty crunchy side — not for everyone</p>
+                        <div class="dish-meta">₹581.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="4" data-name="Extra Tortilla Chips" data-price="374">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.CXvElu1iwBwSYEYb_JjQhQHaE5?pid=Api&P=0&h=180" alt="Chips">
+                    <div class="dish-body">
+                        <h3>Extra Tortilla Chips</h3>
+                        <p class="dish-desc">Extra chips to make your guacamole laaaasttttt</p>
+                        <div class="dish-meta">₹374.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <!-- New menu items (Indian favourites + dessert) -->
+                <article class="dish-card" data-id="5" data-name="Paneer Tikka" data-price="379">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.mgCn-enIBTdUFiDHGVAKfwHaHa?pid=Api&P=0&h=180" alt="Paneer Tikka">
+                    <div class="dish-body">
+                        <h3>Paneer Tikka</h3>
+                        <p class="dish-desc">smoky grilled paneer with spices and peppers</p>
+                        <div class="dish-meta">₹379.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="6" data-name="Butter Chicken" data-price="499">
+                    <img src="https://img.freepik.com/premium-photo/flavorful-indulgence-butter-chicken-dish-generative-by-ai_893571-7695.jpg" alt="Butter Chicken">
+                    <div class="dish-body">
+                        <h3>Butter Chicken</h3>
+                        <p class="dish-desc">classic creamy tomato gravy with tender chicken</p>
+                        <div class="dish-meta">₹499.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="7" data-name="Veg Biryani" data-price="289">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.afVbpFldlPr3GU6sskOwQgHaE8?pid=Api&P=0&h=180" alt="Veg Biryani">
+                    <div class="dish-body">
+                        <h3>Veg Biryani</h3>
+                        <p class="dish-desc">fragrant basmati rice cooked with vegetables & spices</p>
+                        <div class="dish-meta">₹289.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="8" data-name="Masala Dosa" data-price="159">
+                    <img src="https://img.freepik.com/premium-photo/masala-dosa-indian-dish-kerala-special_651966-215.jpg">
+                    <div class="dish-body">
+                        <h3>Masala Dosa</h3>
+                        <p class="dish-desc">crispy rice crepe filled with spiced potato masala</p>
+                        <div class="dish-meta">₹159.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="9" data-name="Gulab Jamun" data-price="99">
+                    <img src="https://img.freepik.com/premium-photo/tempting-treat-gulab-jamun-pristine-white-bowl-indulgent-sweet-dish_896558-5921.jpg" alt="Gulab Jamun">
+                    <div class="dish-body">
+                        <h3>Gulab Jamun</h3>
+                        <p class="dish-desc">soft syrup-soaked dumplings — a classic dessert</p>
+                        <div class="dish-meta">₹99.00</div>
+                        <button class="btn-add">Add</button>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="cart-panel" id="cartPanel">
+                <div class="cart-header">
+                    <h2>Your Cart</h2>
+                    <div class="cart-actions">
+                        <label class="switch"><input type="radio" name="mode" value="dine" checked> Dine</label>
+                        <label class="switch"><input type="radio" name="mode" value="pickup"> Pickup</label>
+                    </div>
+                </div>
+
+                <div class="cart-body">
+                    <table id="cartTable">
+                        <thead>
+                            <tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th><th></th></tr>
+                        </thead>
+                                <tbody>
+                                    <tr class="empty"><td colspan="5">No items yet</td></tr>
+                                </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-footer">
+                    <div class="total-row">Total: <span id="totalAmt">₹0.00</span></div>
+                    <button id="timeBtn" class="btn btn-ghost">Choose time</button>
+                    <button id="checkoutBtn" class="btn btn-full">Checkout</button>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <!-- Time picker modal -->
+    <div id="timeModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close" id="closeTime">×</button>
+            <h3>When will you pick up / dine?</h3>
+            <div class="modal-body">
+                <label for="pickupDate">Select a pickup date</label>
+                <input type="date" id="pickupDate" />
+
+                <label>Select desired pickup/dine time</label>
+                <div id="timeGrid" class="time-grid"></div>
+            </div>
+            <div class="modal-actions">
+                <button id="saveTime" class="btn btn-full">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="resources/js/order.js"></script>
+</body>
+</html>

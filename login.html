@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Login with OTP Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+        }
+        
+        body {
+            background-image: url(resources/css/imgs/resturent.jpg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .otp-input {
+            width: 40px;
+            height: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .phone-input {
+            position: relative;
+        }
+        
+        .country-code {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .phone-field {
+            padding-left: 60px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .success-check {
+            color: #10b981;
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s;
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card p-8 mx-4">
+        <div id="phoneForm">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
+                <p class="text-gray-600">Enter your phone number to sign in</p>
+                <p class="text-sm text-gray-500 mt-1">(Demo: OTP will be shown in console/alert)</p>
+            </div>
+            
+            <div class="mb-6">
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <div class="phone-input relative">
+                    <span class="country-code">+91</span>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        class="phone-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                        maxlength="14"
+                        placeholder="98765 43210"
+                        required
+                        onfocus="this.placeholder=''"
+                        onblur="this.placeholder='98765 43210'"
+                    />
+                </div>
+                <p id="phoneError" class="mt-1 text-sm text-red-600 hidden">Please enter a valid phone number</p>
+            </div>
+            
+            <button id="sendOtpBtn" class="btn-primary w-full flex items-center justify-center">
+                <span>Send Verification Code</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            
+            <div class="mt-6 text-center text-sm text-gray-600">
+                By continuing, you agree to our <a href="#" class="text-indigo-600 hover:underline">Terms</a> and <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>.
+            </div>
+        </div>
+        
+        <div id="otpForm" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Verify Your Phone</h1>
+                <p class="text-gray-600">We sent a 6-digit code to <span id="displayPhone" class="font-medium"></span></p>
+                <button id="changeNumber" class="text-indigo-600 hover:underline mt-2 text-sm">Change phone number</button>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Enter Verification Code</label>
+                <div class="flex justify-center mb-4">
+                    <input type="text" maxlength="1" class="otp-input" data-index="1">
+                    <input type="text" maxlength="1" class="otp-input" data-index="2">
+                    <input type="text" maxlength="1" class="otp-input" data-index="3">
+                    <input type="text" maxlength="1" class="otp-input" data-index="4">
+                    <input type="text" maxlength="1" class="otp-input" data-index="5">
+                    <input type="text" maxlength="1" class="otp-input" data-index="6">
+                </div>
+                <p id="otpError" class="mt-1 text-sm text-red-600 hidden">Invalid verification code</p>
+                
+                <div class="text-center mt-4">
+                    <button id="resendOtp" class="text-indigo-600 hover:underline text-sm">
+                        Didn't receive code? <span class="font-medium">Resend</span>
+                    </button>
+                    <p id="countdown" class="text-gray-500 text-sm mt-1 hidden">Resend code in <span id="timer">30</span>s</p>
+                </div>
+            </div>
+            
+            <button id="verifyOtpBtn" class="btn-primary w-full">
+                Verify and Continue
+            </button>
+        </div>
+        
+        <div id="successScreen" class="hidden text-center py-8">
+            <div class="success-check">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Verification Successful!</h2>
+            <p class="text-gray-600 mb-6">You're now logged in.</p>
+            <button id="goToDashboard" class="btn-primary">
+                <a href="index.html" onclick="login()">Go to Dashboard</a>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const phoneForm = document.getElementById('phoneForm');
+            const otpForm = document.getElementById('otpForm');
+            const successScreen = document.getElementById('successScreen');
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            const sendOtpBtn = document.getElementById('sendOtpBtn');
+            const displayPhone = document.getElementById('displayPhone');
+            const changeNumber = document.getElementById('changeNumber');
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const otpError = document.getElementById('otpError');
+            const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+            const resendOtp = document.getElementById('resendOtp');
+            const countdown = document.getElementById('countdown');
+            const timer = document.getElementById('timer');
+            const goToDashboard = document.getElementById('goToDashboard');
+            
+            // Variables
+            let generatedOtp = '';
+            let phoneNumber = '';
+            let countdownInterval;
+            let timeLeft = 30;
+            
+            // Format phone number input
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                
+                if (value.length > 0) {
+                    formattedValue = '(' + value.substring(0, 3);
+                }
+                if (value.length > 3) {
+                    formattedValue += ') ' + value.substring(3, 6);
+                }
+                if (value.length > 6) {
+                    formattedValue += '-' + value.substring(6, 10);
+                }
+                
+                e.target.value = formattedValue;
+            });
+            
+            // Send OTP button click
+            sendOtpBtn.addEventListener('click', function() {
+                const phoneValue = phoneInput.value.replace(/\D/g, '');
+                
+                // require exactly 10 digits and starting digit 6/7/8/9 for Indian mobile numbers
+                if (phoneValue.length === 10 && (phoneValue.startsWith('9') || phoneValue.startsWith('8') || phoneValue.startsWith('7') || phoneValue.startsWith('6'))) {
+                    phoneNumber = phoneInput.value;
+                    phoneError.classList.add('hidden');
+                    phoneInput.classList.remove('border-red-500');
+                    
+                    // Generate random 6-digit OTP
+                    generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                    console.log('Generated OTP:', generatedOtp); // For demo purposes
+                    alert(`Demo: OTP sent to +91${phoneValue} is ${generatedOtp}`);
+                    
+                    // Show OTP form
+                    displayPhone.textContent = phoneNumber;
+                    phoneForm.classList.add('hidden');
+                    otpForm.classList.remove('hidden');
+                    
+                    // Start countdown for resend
+                    startCountdown();
+                    
+                    // Auto-focus first OTP input
+                    setTimeout(() => {
+                        otpInputs[0].focus();
+                    }, 100);
+                } else {
+                    phoneError.classList.remove('hidden');
+                    phoneInput.classList.add('border-red-500');
+                    phoneForm.classList.add('shake');
+                    setTimeout(() => {
+                        phoneForm.classList.remove('shake');
+                    }, 500);
+                }
+            });
+            
+            // Change number link
+            changeNumber.addEventListener('click', function() {
+                otpForm.classList.add('hidden');
+                phoneForm.classList.remove('hidden');
+                phoneInput.focus();
+                clearInterval(countdownInterval);
+            });
+            
+            // OTP input handling
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    if (e.target.value.length === 1) {
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        } else {
+                            otpInputs[index].blur();
+                        }
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+            
+            // Verify OTP button
+            verifyOtpBtn.addEventListener('click', function() {
+                let enteredOtp = '';
+                otpInputs.forEach(input => {
+                    enteredOtp += input.value;
+                });
+                
+                if (enteredOtp === generatedOtp) {
+                    otpError.classList.add('hidden');
+                    otpInputs.forEach(input => {
+                        input.classList.remove('border-red-500');
+                    });
+                    
+                    // Show success screen
+                    otpForm.classList.add('hidden');
+                    successScreen.classList.remove('hidden');
+                } else {
+                    otpError.classList.remove('hidden');
+                    otpInputs.forEach(input => {
+                        input.classList.add('border-red-500');
+                    });
+                    otpForm.classList.add('shake');
+                    setTimeout(() => {
+                        otpForm.classList.remove('shake');
+                    }, 500);
+                }
+            });
+            
+            // Resend OTP
+            resendOtp.addEventListener('click', function() {
+                if (resendOtp.classList.contains('text-gray-400')) return;
+                
+                // Generate new OTP
+                generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                console.log('New OTP:', generatedOtp); // For demo purposes
+                alert(`Demo: New OTP sent to +91${phoneInput.value.replace(/\D/g, '')} is ${generatedOtp}`);
+                
+                // Reset OTP inputs
+                otpInputs.forEach(input => {
+                    input.value = '';
+                });
+                otpInputs[0].focus();
+                
+                // Show success message
+                const resendMsg = document.createElement('div');
+                resendMsg.className = 'text-green-600 text-sm mt-2';
+                resendMsg.textContent = 'New verification code sent!';
+                resendOtp.parentNode.insertBefore(resendMsg, countdown);
+                setTimeout(() => {
+                    resendMsg.remove();
+                }, 3000);
+                
+                // Restart countdown
+                clearInterval(countdownInterval);
+                timeLeft = 30;
+                startCountdown();
+            });
+            
+            // Go to dashboard
+            goToDashboard.addEventListener('click', function() {
+                alert('Redirecting to dashboard...'); // In a real app, this would redirect
+            });
+            
+            // Countdown function
+            function startCountdown() {
+                countdown.classList.remove('hidden');
+                timer.textContent = timeLeft;
+                resendOtp.classList.add('text-gray-400');
+                resendOtp.classList.remove('text-indigo-600');
+                
+                countdownInterval = setInterval(() => {
+                    timeLeft--;
+                    timer.textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        countdown.classList.add('hidden');
+                        resendOtp.classList.remove('text-gray-400');
+                        resendOtp.classList.add('text-indigo-600');
+                        timeLeft = 30;
+                    }
+                }, 1000);
+            }
+        });
+        function login(){
+            window.location.assign("login.html");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book a Table</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="vendor/css/grid.css">
+    <link rel="stylesheet" href="resources/css/booking.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="row">
+            <img class="logo" src="resources/imgs/logo.png" alt="logo-img">
+            <ul class="main-nav">
+                <li><a href="booking.html">Book Table</a></li>
+                <li><a href="order.html">Order Food </a></li>
+                <li><a href="#hiw">How it Works</a></li>
+                <li><a href="#city">Cities</a></li>
+                <li><a href="login.html">Login</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <main class="booking-page">
+        <header class="booking-header">
+            <h1>Book A Table</h1>
+            <p>Reserve your table quickly — we'll confirm right away.</p>
+        </header>
+
+        <section class="booking-wrap">
+            <form id="bookingForm" class="booking-form" novalidate>
+                <table class="booking-table">
+                    <tbody>
+                        <tr>
+                            <th><label for="name">Full name</label></th>
+                            <td><input id="name" name="name" type="text" placeholder="John Doe" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="phone">Phone</label></th>
+                            <td><input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="email">Email</label></th>
+                            <td><input id="email" name="email" type="email" placeholder="you@example.com" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="date">Date</label></th>
+                            <td><input id="date" name="date" type="date" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="time">Time</label></th>
+                            <td><input id="time" name="time" type="time" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="people">No. of people</label></th>
+                            <td><input id="people" name="people" type="number" min="1" max="20" value="2" required></td>
+                        </tr>
+                        <tr>
+                            <th><label for="location">Location</label></th>
+                            <td>
+                                <select id="location" name="location" required>
+                                    <option value="">Choose location</option>
+                                    <option>Ground Floor — Main Hall</option>
+                                    <option>Rooftop</option>
+                                    <option>Private Room</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="requests">Special requests</label></th>
+                            <td><textarea id="requests" name="requests" rows="3" placeholder="Allergies, celebration, seating preference"></textarea></td>
+                        </tr>
+                        <tr class="actions">
+                            <td colspan="2">
+                                <button type="submit" class="btn btn-full">Confirm booking</button>
+                                <button type="button" id="cancelBtn" class="btn btn-ghost">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+
+            <div id="confirm" class="confirm hidden" role="status" aria-live="polite">
+                <h3>Booking Received</h3>
+                <p>Thanks — we'll email confirmation shortly. <a href="index.html">Return to home</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="resources/js/booking.js"></script>
+</body>
+</html>
